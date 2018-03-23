@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "109909917728",
+    "firebase_url": "https://study-better-app.firebaseio.com",
+    "project_id": "study-better-app",
+    "storage_bucket": "study-better-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:109909917728:android:7d5c338b675177ae",
+        "android_client_info": {
+          "package_name": "com.example.kevdevries.studybetter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "109909917728-jurhokvprcks93st8s296e25uob5m8km.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kevdevries.studybetter",
+            "certificate_hash": "34cd33a5d4f4b8c38c2ac52a6af76bda8ab2117d"
+          }
+        },
+        {
+          "client_id": "109909917728-q14tos09abhmsfdjqro1dit3bgfdc1s5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0G1KU8a7X1K4K_z3eGoF6JSNW0MTGWhU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "109909917728-q14tos09abhmsfdjqro1dit3bgfdc1s5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

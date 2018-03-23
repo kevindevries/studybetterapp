@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">Study Better</string>
+    <string name="login_message">"Login: "</string>
+    <string name="button_login">Login</string>
+    <string name="button_register1">Register Now!</string>
+    <string name="btn_logout">Log Out</string>
+    <string name="username_message">Username</string>
+    <string name="password_message">Password</string>
+    <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
+    <string name="auth_failed">Authentication failed, check your email and password or register</string>
+    <string name="firstname">First Name:</string>
+    <string name="firstname_message">e.g John</string>
+    <string name="surname">Surname:</string>
+    <string name="surname_message">e.g Smith</string>
+    <string name="register">Register</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="radio_student">Student</string>
+    <string name="radio_tutor">Tutor</string>
+    <string name="areyou">Are you a...</string>
+    <string name="email">Email address (username):</string>
+    <string name="email_message">e.g example@mycit.ie</string>
+    <string name="college">College/University:</string>
+    <string name="college_message">e.g CIT</string>
+    <string name="department">Department:</string>
+    <string name="department_message">e.g Computer Science</string>
+    <string name="course">Course:</string>
+    <string name="course_message">e.g Software Development</string>
+    <string name="password">Password:</string>
+    <string name="password_hint">e.g ************</string>
+    <string name="button_register2">Register</string>
+    <string name="button_cancel">Cancel</string>
+    <item name="visible" type="id" />
+    <item name="masked" type="id" />
+    <string name="btn_update">Update Profile</string>
+    <string name="btn_search">Search</string>
+    <string name="btn_groups">Study Groups</string>
+    <string name="btn_grinds">Grinds</string>
+    <string name="study_better">Study Better&#8482;</string>
+    <string name="grinds">Grinds</string>
+    <string name="study_groups">Study Groups</string>
+    <string name="search">Search</string>
+</resources>
