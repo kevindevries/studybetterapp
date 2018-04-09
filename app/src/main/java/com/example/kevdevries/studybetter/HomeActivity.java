@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseUser;
 //Student Home Screen
 public class HomeActivity extends AppCompatActivity {
     private TextView email;
-    private Button logOut;
+    private Button btnUpdate, btnSearch, btnGrinds, btnGroups, btnLogOut;
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
 
@@ -41,12 +41,44 @@ public class HomeActivity extends AppCompatActivity {
             }
         };
 
-        logOut = (Button) findViewById(R.id.logout);
         email = (TextView) findViewById(R.id.email);
+        btnUpdate = (Button) findViewById(R.id.update);
+        btnSearch = (Button) findViewById(R.id.search);
+        btnGrinds = (Button) findViewById(R.id.grinds);
+        btnGroups = (Button) findViewById(R.id.groups);
+        btnLogOut = (Button) findViewById(R.id.logout);
 
         email.setText(user.getEmail());
 
-        logOut.setOnClickListener(new View.OnClickListener() {
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, RegisterActivity.class));
+            }
+        });
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, SearchActivity.class));
+            }
+        });
+
+        btnGrinds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, GrindsActivity.class));
+            }
+        });
+
+        btnGroups.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, StudyGroupActivity.class));
+            }
+        });
+
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 logOut();

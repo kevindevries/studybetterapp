@@ -20,8 +20,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class RegisterActivity extends AppCompatActivity {
     private RadioGroup radioType;
@@ -30,6 +33,9 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
     private Button btnregister, btncancel;
+    private DatabaseReference rootRef;
+    private DatabaseReference userRef;
+    private DatabaseReference childRef;
     private ProgressDialog progressBar;
     private FirebaseAuth auth;
 
@@ -111,7 +117,7 @@ public class RegisterActivity extends AppCompatActivity {
                             verifyEmail();
 
                             final DatabaseReference currentUserDb = databaseReference.child(userId);
-                            currentUserDb.child("Type").setValue(type);
+                            currentUserDb.child("type").setValue(type);
                             currentUserDb.child("firstName").setValue(firstName);
                             currentUserDb.child("surname").setValue(lastName);
                             currentUserDb.child("college").setValue(college);
@@ -136,9 +142,33 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void updateUserInfoAndUI(){
-        startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
-        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        finish();
+
+        final String userId = auth.getCurrentUser().getUid();
+
+        rootRef = FirebaseDatabase.getInstance().getReference("Users");
+        userRef = rootRef.child(userId);
+        childRef = userRef.child("type");
+
+        childRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String type = dataSnapshot.getValue(String.class);
+
+                if (type.equalsIgnoreCase("Student")){
+                    Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Intent intent = new Intent(RegisterActivity.this, Home2Activity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }
 
     private void verifyEmail() {

@@ -34,9 +34,17 @@
     <string name="btn_update">Update Profile</string>
     <string name="btn_search">Search</string>
     <string name="btn_groups">Study Groups</string>
-    <string name="btn_grinds">Grinds</string>
+    <string name="btn_grinds">View Grinds</string>
     <string name="study_better">Study Better&#8482;</string>
     <string name="grinds">Grinds</string>
     <string name="study_groups">Study Groups</string>
     <string name="search">Search</string>
+    <string name="btn_creategrinds">Create Grinds</string>
+    <string name="grindtitle">Grind Title</string>
+    <string name="recurring">Is this session recurring:</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="titlemessage">Input descriptive title</string>
+    <string name="date">Pick a Date:</string>
+    <string name="time">Pick a Time:</string>
 </resources>

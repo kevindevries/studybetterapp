@@ -1,9 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="10dp"
     tools:context="com.example.kevdevries.studybetter.CreateGrindsActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/register"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/btn_creategrinds"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:text="@string/grindtitle"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/titlemessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="16dp"
+            android:inputType="textPersonName"
+            android:hint="@string/titlemessage"
+            android:textColor="@android:color/darker_gray"
+            android:textColorHint="@android:color/darker_gray"/>
+
+        <TextView
+            android:id="@+id/timepicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:text="@string/time"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"/>
+
+        <TimePicker
+            android:id="@+id/timepickermessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:timePickerMode="spinner"
+            android:layout_gravity="center_horizontal"
+            />
+
+        <TextView
+            android:id="@+id/datePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:text="@string/date"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"/>
+
+        <DatePicker
+            android:id="@+id/datepickermessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:calendarTextColor="@android:color/holo_red_light"
+            android:startYear="2018"
+            android:datePickerMode="spinner"
+            android:calendarViewShown="false"
+            />
+
+        <TextView
+            android:id="@+id/recurring"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:text="@string/recurring"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"/>
+
+        <RadioGroup
+            android:id="@+id/radioType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioStudent"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_width="0dp"
+                android:layout_weight="10"
+                android:layout_height="wrap_content"
+                android:text="@string/yes"
+                android:checked="false" />
+
+            <RadioButton
+                android:id="@+id/radioTutor"
+                android:layout_width="0dp"
+                android:layout_weight="10"
+                android:layout_height="wrap_content"
+                android:text="@string/no"
+                android:checked="true"/>
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            app:layout_constraintTop_toBottomOf="@id/radioType"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
+            android:gravity="center"
+            android:background="@android:color/holo_red_light"
+            android:text="@string/button_register2" />
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
+            android:gravity="center"
+            android:background="@android:color/holo_red_light"
+            android:text="@string/button_cancel" />
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
+</ScrollView>
+

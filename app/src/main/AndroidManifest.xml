@@ -24,7 +24,8 @@
         <activity android:name=".StudyGroupActivity" />
         <activity android:name=".GrindsActivity" />
         <activity android:name=".SearchActivity" />
-        <activity android:name=".Grinds2Activity"></activity>
+        <activity android:name=".Grinds2Activity" />
+        <activity android:name=".CreateGrindsActivity"></activity>
     </application>
 
 </manifest>

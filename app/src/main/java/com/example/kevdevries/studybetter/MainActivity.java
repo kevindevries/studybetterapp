@@ -13,12 +13,20 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 
 public class MainActivity extends AppCompatActivity {
 
     private EditText inputEmail, inputPassword;
     private FirebaseAuth auth;
     private Button btnRegister, btnLogin;
+    private DatabaseReference rootRef;
+    private DatabaseReference userRef;
+    private DatabaseReference childRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +45,6 @@ public class MainActivity extends AppCompatActivity {
         inputPassword = (EditText) findViewById(R.id.password);
         btnRegister = (Button) findViewById(R.id.btn_registernow);
         btnLogin = (Button) findViewById(R.id.btn_login);
-
-        //Get Firebase auth instance
-        auth = FirebaseAuth.getInstance();
-
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -83,9 +87,34 @@ public class MainActivity extends AppCompatActivity {
                                         Toast.makeText(MainActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
                                     }
                                 } else {
-                                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                                    startActivity(intent);
-                                    finish();
+
+                                    final String userId = auth.getCurrentUser().getUid();
+
+                                    rootRef = FirebaseDatabase.getInstance().getReference("Users");
+                                    userRef = rootRef.child(userId);
+                                    childRef = userRef.child("type");
+
+                                    childRef.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            String type = dataSnapshot.getValue(String.class);
+
+                                            if (type.equalsIgnoreCase("Student")){
+                                                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                                                startActivity(intent);
+                                                finish();
+                                            } else {
+                                                Intent intent = new Intent(MainActivity.this, Home2Activity.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+                                        }
+                                    });
+
                                 }
                             }
                         });

@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseUser;
 //Tutor Home Screen
 public class Home2Activity extends AppCompatActivity {
     private TextView email;
-    private Button logOut;
+    private Button btnUpdate, btnCreateGrinds, btnGrinds, btnLogOut;
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
 
@@ -43,12 +43,36 @@ public class Home2Activity extends AppCompatActivity {
             }
         };
 
-        logOut = (Button) findViewById(R.id.logout);
         email = (TextView) findViewById(R.id.email);
+        btnUpdate = (Button) findViewById(R.id.update);
+        btnCreateGrinds = (Button) findViewById(R.id.creategrinds);
+        btnGrinds = (Button) findViewById(R.id.grinds);
+        btnLogOut = (Button) findViewById(R.id.logout);
 
         email.setText(user.getEmail());
 
-        logOut.setOnClickListener(new View.OnClickListener() {
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Home2Activity.this, RegisterActivity.class));
+            }
+        });
+
+        btnCreateGrinds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Home2Activity.this, CreateGrindsActivity.class));
+            }
+        });
+
+        btnGrinds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Home2Activity.this, Grinds2Activity.class));
+            }
+        });
+
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 logOut();
