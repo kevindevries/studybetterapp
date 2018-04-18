@@ -13,7 +13,7 @@ import java.util.List;
  * Created by KevdeVries on 09/04/2018.
  */
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHolder>{
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHoder>{
 
     List<FireModel> list;
     Context context;
@@ -24,16 +24,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHold
     }
 
     @Override
-    public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyHoder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(context).inflate(R.layout.card,parent,false);
-        MyHolder myHolder = new MyHolder(view);
+        MyHoder myHoder = new MyHoder(view);
 
-        return myHolder;
+        return myHoder;
     }
 
     @Override
-    public void onBindViewHolder(MyHolder holder, int position) {
+    public void onBindViewHolder(MyHoder holder, int position) {
         FireModel mylist = list.get(position);
         holder.title.setText(mylist.getTitle());
         holder.date.setText(mylist.getDate());
@@ -66,15 +66,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHold
 
     }
 
-    class MyHolder extends RecyclerView.ViewHolder{
+    class MyHoder extends RecyclerView.ViewHolder{
         TextView title,date,time,recurring;
 
-        public MyHolder(View itemView) {
+        public MyHoder(View itemView) {
             super(itemView);
-            title = (TextView) itemView.findViewById(R.id.title);
-            date = (TextView) itemView.findViewById(R.id.date);
-            time = (TextView) itemView.findViewById(R.id.time);
-            recurring = (TextView) itemView.findViewById(R.id.recurring);
+            title = (TextView) itemView.findViewById(R.id.vtitle);
+            date = (TextView) itemView.findViewById(R.id.vdate);
+            time = (TextView) itemView.findViewById(R.id.vtime);
+            recurring = (TextView) itemView.findViewById(R.id.vrecurring);
         }
     }
 }

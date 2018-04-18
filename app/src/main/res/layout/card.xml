@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -10,43 +9,66 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:elevation="3dp">
+        android:layout_margin="5dp"
+        android:elevation="3dp"
+        card_view:cardCornerRadius="1dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/vtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="title"
-                android:padding="3dp"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
                 android:textSize="15sp"/>
 
             <TextView
-                android:id="@+id/time"
+                android:id="@+id/vtime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="time"
-                android:padding="3dp"
-                android:textSize="15sp"/>
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:textSize="12sp"
+                android:layout_below="@id/vtitle"
+                android:layout_alignRight="@+id/vtitle"
+                android:layout_alignEnd="@+id/vtitle"/>
 
             <TextView
-                android:id="@+id/date"
+                android:id="@+id/vdate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="date"
-                android:padding="3dp"
-                android:textSize="15sp"/>
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:layout_below="@id/vtime"
+                android:textSize="12sp"/>
 
             <TextView
-                android:id="@+id/recurring"
+                android:id="@+id/vrecurring"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="recurring"
-                android:padding="3dp"
-                android:textSize="15sp"/>
+                android:paddingBottom="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:layout_below="@id/vdate"
+                android:textSize="12sp"/>
+
+            <ImageView
+                android:id="@+id/overflow"
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/title"
+                android:layout_marginTop="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/menu" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
