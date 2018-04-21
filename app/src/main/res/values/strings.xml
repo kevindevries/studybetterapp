@@ -47,4 +47,9 @@
     <string name="titlemessage">Input descriptive title</string>
     <string name="date">Pick a Date:</string>
     <string name="time">Pick a Time:</string>
+    <string name="btn_forgot_password">Forgot Password?</string>
+    <string name="lbl_forgot_password">Forgot Password?</string>
+    <string name="forgot_password_msg">Please enter your registered email address so we can send your password reset instructions.</string>
+    <string name="btn_back">Back</string>
+    <string name="btn_reset_password">Reset Password</string>
 </resources>

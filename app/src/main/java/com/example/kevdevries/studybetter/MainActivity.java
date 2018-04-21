@@ -9,6 +9,8 @@ import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.app.AlertDialog;
+import android.view.LayoutInflater;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -23,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText inputEmail, inputPassword;
     private FirebaseAuth auth;
-    private Button btnRegister, btnLogin;
+    private Button btnRegister, btnLogin, btnForgotPassword;
     private DatabaseReference rootRef;
     private DatabaseReference userRef;
     private DatabaseReference childRef;
@@ -45,13 +47,21 @@ public class MainActivity extends AppCompatActivity {
         inputPassword = (EditText) findViewById(R.id.password);
         btnRegister = (Button) findViewById(R.id.btn_registernow);
         btnLogin = (Button) findViewById(R.id.btn_login);
+        btnForgotPassword = (Button) findViewById(R.id.btn_forgot_password);
+
+        btnForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetPassword();
+            }
+        });
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(new Intent(MainActivity.this, RegisterActivity.class));
-                    }
-                });
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+            }
+        });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                                         public void onDataChange(DataSnapshot dataSnapshot) {
                                             String type = dataSnapshot.getValue(String.class);
 
-                                            if (type.equalsIgnoreCase("Student")){
+                                            if (type.equalsIgnoreCase("Student")) {
                                                 Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                                                 startActivity(intent);
                                                 finish();
@@ -121,5 +131,44 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void resetPassword() {
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.activity_reset_password, null);
+        dialogBuilder.setView(dialogView);
+
+        final EditText editEmail = (EditText) dialogView.findViewById(R.id.email);
+        final Button btnReset = (Button) dialogView.findViewById(R.id.btn_reset_password);
+
+        final AlertDialog dialog = dialogBuilder.create();
+
+        btnReset.setOnClickListener(new View.OnClickListener() {
+                        public void onClick(View v) {
+                            String email = editEmail.getText().toString().trim();
+
+                            if (TextUtils.isEmpty(email)) {
+                                Toast.makeText(getApplication(), "Enter your registered email id", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+
+                            auth.sendPasswordResetEmail(email)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(MainActivity.this, "We have sent you instructions to reset your password!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(MainActivity.this, "Failed to send reset email!", Toast.LENGTH_SHORT).show();
+                                            }
+
+                                            dialog.dismiss();
+                                        }
+                                    });
+
+                        }
+                    });
+                    dialog.show();
+                }
 
 }

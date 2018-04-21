@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="10dp"
     tools:context="com.example.kevdevries.studybetter.MainActivity">
 
     <LinearLayout
@@ -33,8 +34,7 @@
                 android:layout_marginBottom="16dp"
                 android:ems="10"
                 android:hint="@string/username_message"
-                android:inputType="textEmailAddress"
-                android:textColor="@color/colorPrimary" />
+                android:inputType="textEmailAddress"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -50,25 +50,34 @@
                 android:ems="10"
                 android:hint="@string/password_message"
                 android:imeOptions="actionNext"
-                android:inputType="textPassword"
-                android:textColor="@color/colorPrimary" />
+                android:inputType="textPassword" />
         </android.support.design.widget.TextInputLayout>
 
         <Button
             android:id="@+id/btn_login"
-            android:layout_width="180dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@android:color/holo_red_light"
+            android:background="@color/colorPrimary"
             android:text="@string/button_login" />
 
         <Button
             android:id="@+id/btn_registernow"
-            android:layout_width="160dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@android:color/holo_red_light"
+            android:background="@color/colorPrimary"
             android:text="@string/button_register1" />
+
+        <Button
+            android:id="@+id/btn_forgot_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:background="@null"
+            android:text="@string/btn_forgot_password"
+            android:textAllCaps="false"
+            android:textColor="?attr/colorAccent" />
 
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
