@@ -52,4 +52,5 @@
     <string name="forgot_password_msg">Please enter your registered email address so we can send your password reset instructions.</string>
     <string name="btn_back">Back</string>
     <string name="btn_reset_password">Reset Password</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

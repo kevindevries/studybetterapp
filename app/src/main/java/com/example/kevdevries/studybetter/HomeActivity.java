@@ -60,7 +60,7 @@ public class HomeActivity extends AppCompatActivity {
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, SearchActivity.class));
+                startActivity(new Intent(HomeActivity.this, MapsActivity.class));
             }
         });
 
