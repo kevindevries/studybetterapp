@@ -3,16 +3,20 @@ package com.example.kevdevries.studybetter;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.widget.Toast;
+import android.support.constraint.Placeholder;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -24,18 +28,35 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.DataSnapshot;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MapFragment extends SupportMapFragment implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
+    private FirebaseAuth auth;
+    private FirebaseDatabase database;
+    private DatabaseReference databaseReference, nameRef;
     GoogleMap mGoogleMap;
     SupportMapFragment mapFrag;
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
-    Location mLastLocation;
+    Location mLastLocation, currentLocation;
     Marker mCurrLocationMarker;
+    String value_lat = null;
+    String value_lng = null;
 
     @Override
     public void onResume() {
@@ -64,7 +85,14 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
+
         mGoogleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference().child("Users").child("Locations");
+
+        //get firebase auth instance
+        auth = FirebaseAuth.getInstance();
 
         //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -84,6 +112,16 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
         }
     }
 
+    //create markers for all users
+    protected Marker createMarker(double latitude, double longitude, String title, String snippet) {
+        return mGoogleMap.addMarker(new MarkerOptions()
+                .position(new LatLng(latitude, longitude))
+                .anchor(0.5f, 0.5f)
+                .title("Other User")
+                .snippet(snippet).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+
+    }
+
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addConnectionCallbacks(this)
@@ -98,11 +136,49 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
         mLocationRequest = new LocationRequest();
         //mLocationRequest.setInterval(1000);
         //mLocationRequest.setFastestInterval(1000);
+
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         if (ContextCompat.checkSelfPermission(getActivity(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+        }
+
+        /*database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference().child("Users");
+
+        //get firebase auth instance
+        auth = FirebaseAuth.getInstance();*/
+
+        currentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
+        if (currentLocation != null) {
+
+            //Save Latitude and Longitude to Firebase. Update once location changes
+            value_lat = String.valueOf(currentLocation.getLatitude());
+            value_lng = String.valueOf(currentLocation.getLongitude());
+
+            final String userId = auth.getCurrentUser().getUid();
+
+            nameRef = database.getReference().child("Users").child(userId).child("firstName");
+            final DatabaseReference currentUserDb = databaseReference.child(userId);
+
+            nameRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    String name = dataSnapshot.getValue(String.class);
+                    currentUserDb.child("firstName").setValue(name);
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    Log.w("Failed to read value.", error.toException());
+                }
+
+            });
+            currentUserDb.child("latitude").setValue(value_lat);
+            currentUserDb.child("longitude").setValue(value_lng);
         }
     }
 
@@ -117,20 +193,59 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     @Override
     public void onLocationChanged(Location location) {
         mLastLocation = location;
+
         if (mCurrLocationMarker != null) {
             mCurrLocationMarker.remove();
         }
 
         //Place current location marker
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        MarkerOptions markerOptions = new MarkerOptions();
+        final MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
-        markerOptions.title("Current Position");
+        markerOptions.title("You");
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
         mCurrLocationMarker = mGoogleMap.addMarker(markerOptions);
 
+        DatabaseReference childRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Locations");
+
+        childRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int size = (int) dataSnapshot.getChildrenCount();
+                Marker[] allMarkers = new Marker[size];
+                //mGoogleMap.clear();
+
+                for (DataSnapshot s : dataSnapshot.getChildren()) {
+
+                    CoordinatesModel coordinatesModel = new CoordinatesModel();
+
+                    for (int i = 0; i <= size; i++) {
+                        try {
+                            coordinatesModel.setLatitude(s.getValue(CoordinatesModel.class).getLatitude());
+                            coordinatesModel.setLongitude(s.getValue(CoordinatesModel.class).getLongitude());
+                            coordinatesModel.setFirstName(s.getValue(CoordinatesModel.class).getFirstName());
+
+                            double latt = coordinatesModel.getLatitude();
+                            double lngg = coordinatesModel.getLongitude();
+                            String firstName = coordinatesModel.getFirstName();
+                            //LatLng latLng1 = new LatLng(latt, lngg);
+                            allMarkers[i] =
+                                    mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(latt, lngg)).title(firstName));
+
+                        } catch (Exception ex) {
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Log.w("Failed to read value.", error.toException());
+            }
+        });
+
         //move map camera
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11));
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
 
     }
 
@@ -205,5 +320,16 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
             // permissions this app might request
         }
     }
+
+    /*@Override
+    public void onStop() {
+        super.onStop();
+
+        final String userId = auth.getCurrentUser().getUid();
+
+        final DatabaseReference currentUserDb = databaseReference.child(userId);
+        currentUserDb.child("latitude").setValue(0);
+        currentUserDb.child("longitude").setValue(0);
+    }*/
 
 }

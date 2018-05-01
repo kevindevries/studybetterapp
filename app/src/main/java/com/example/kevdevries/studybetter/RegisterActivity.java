@@ -33,9 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
     private Button btnregister, btncancel;
-    private DatabaseReference rootRef;
-    private DatabaseReference userRef;
-    private DatabaseReference childRef;
+    private DatabaseReference rootRef, userRef, childRef;
     private ProgressDialog progressBar;
     private FirebaseAuth auth;
 
@@ -166,7 +164,8 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(DatabaseError error) {
+                Log.w("Failed to read value.", error.toException());
             }
 
         });

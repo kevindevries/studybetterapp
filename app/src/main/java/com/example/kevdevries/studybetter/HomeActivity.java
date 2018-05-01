@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 //Student Home Screen
 public class HomeActivity extends AppCompatActivity {
@@ -18,11 +20,16 @@ public class HomeActivity extends AppCompatActivity {
     private Button btnUpdate, btnSearch, btnGrinds, btnGroups, btnLogOut;
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
+    private FirebaseDatabase database;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference().child("Users");
 
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -89,6 +96,13 @@ public class HomeActivity extends AppCompatActivity {
 
     //sign out method
     public void logOut() {
+
+        final String userId = auth.getCurrentUser().getUid();
+
+        final DatabaseReference currentUserDb = databaseReference.child(userId);
+        currentUserDb.child("latitude").setValue(0);
+        currentUserDb.child("longitude").setValue(0);
+
         auth.signOut();
     }
 

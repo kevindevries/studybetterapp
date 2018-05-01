@@ -15,8 +15,8 @@ import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHoder>{
 
-    List<FireModel> list;
-    Context context;
+    private List<FireModel> list;
+    private Context context;
 
     public RecyclerAdapter(List<FireModel> list, Context context) {
         this.list = list;
@@ -69,7 +69,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHode
     class MyHoder extends RecyclerView.ViewHolder{
         TextView title,date,time,recurring;
 
-        public MyHoder(View itemView) {
+        private MyHoder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.vtitle);
             date = (TextView) itemView.findViewById(R.id.vdate);
