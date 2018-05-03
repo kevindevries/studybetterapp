@@ -46,31 +46,36 @@ public class GrindsActivity extends AppCompatActivity {
 
         userRootRef = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("department");
 
-        grindRootRef = FirebaseDatabase.getInstance().getReference("Grinds").child("Department:");
+        database = FirebaseDatabase.getInstance();
+        grindRootRef = database.getReference().child("Grinds");
 
         userRootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot userDataSnapshot) {
                 final String userDepartment = userDataSnapshot.getValue(String.class);
+                Log.i("The user department:", userDepartment);
 
                 grindRootRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot grindDataSnapshot) {
-                        final String grindDepartment = grindDataSnapshot.getKey();
+                    public void onDataChange(final DataSnapshot grindDataSnapshot) {
 
-                        if (grindDepartment.equalsIgnoreCase(userDepartment)) {
+                        for (DataSnapshot userSnapshot : grindDataSnapshot.getChildren()) {
+                            final String grindDepartment = userSnapshot.getKey();
+                            Log.i("The grind department:", grindDepartment);
 
-                            grindRef = grindRootRef.child(grindDepartment);
-                            grindRef.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (grindDepartment.equalsIgnoreCase(userDepartment)) {
+                                Log.i("Match found for:", grindDepartment);
+                                grindRef = grindRootRef.child(userDepartment);
+                                grindRef.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                    //Loop 1 to go through all the child nodes of User ID
-                                    for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                                        //loop 2 to go through all the child nodes of grind ID
-                                        for (DataSnapshot grindsSnapshot : userSnapshot.getChildren()) {
+                                        //Loop 1 to go through all the child nodes of User ID
+                                        for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                                            //loop 2 to go through all the child nodes of grind ID
                                             list = new ArrayList<FireModel>();
-                                            //for (DataSnapshot dataSnapshot1 : grindsSnapshot.getChildren()) {
+                                            for (DataSnapshot grindsSnapshot : userSnapshot.getChildren()) {
+                                                //for (DataSnapshot dataSnapshot1 : grindsSnapshot.getChildren()) {
 
                                                 FireModel value = grindsSnapshot.getValue(FireModel.class);
                                                 FireModel fire = new FireModel();
@@ -79,25 +84,28 @@ public class GrindsActivity extends AppCompatActivity {
                                                 //String date = dataSnapshot1.child("date").getValue().toString();
                                                 //String recurring = dataSnapshot1.child("recurring").getValue().toString();
                                                 String date = value.getDate();
+                                                String location = value.getLocation();
                                                 String recurring = value.getRecurring();
                                                 String time = value.getTime();
                                                 String title = value.getTitle();
-                                                fire.setRecurring(recurring);
                                                 fire.setDate(date);
+                                                fire.setLocation(location);
+                                                fire.setRecurring(recurring);
                                                 fire.setTime(time);
                                                 fire.setTitle(title);
                                                 list.add(fire);
-                                            //}
+                                                //}
+                                            }
                                         }
                                     }
-                                }
 
-                                @Override
-                                public void onCancelled(DatabaseError error) {
-                                    Log.w("Failed to read value.", error.toException());
-                                }
-                            });
+                                    @Override
+                                    public void onCancelled(DatabaseError error) {
+                                        Log.w("Failed to read value.", error.toException());
+                                    }
+                                });
 
+                            }
                         }
                     }
 

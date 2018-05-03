@@ -22,7 +22,7 @@
                 android:id="@+id/vtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="title"
+                android:text="@string/cardtitle"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
@@ -32,7 +32,7 @@
                 android:id="@+id/vtime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="time"
+                android:text="@string/cardtime"
                 android:layout_marginStart="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
@@ -43,7 +43,7 @@
                 android:id="@+id/vdate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="date"
+                android:text="@string/carddate"
                 android:layout_marginStart="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
@@ -51,15 +51,26 @@
                 android:textSize="12sp"/>
 
             <TextView
+                android:id="@+id/vlocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cardlocation"
+                android:layout_marginStart="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_below="@id/vdate"
+                android:textSize="12sp"/>
+
+            <TextView
                 android:id="@+id/vrecurring"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="recurring"
+                android:text="@string/cardrecurring"
                 android:layout_marginStart="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_below="@id/vdate"
+                android:layout_below="@id/vlocation"
                 android:textSize="12sp"/>
 
             <ImageView
@@ -67,7 +78,7 @@
                 android:layout_width="20dp"
                 android:layout_height="30dp"
                 android:layout_alignParentRight="true"
-                android:layout_below="@id/title"
+                android:layout_below="@id/vtitle"
                 android:layout_marginTop="10dp"
                 android:src="@drawable/menu" />
         </RelativeLayout>

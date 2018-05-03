@@ -34,7 +34,7 @@ import java.text.SimpleDateFormat;
 public class CreateGrindsActivity extends AppCompatActivity {
     private RadioGroup radioType;
     private RadioButton radioButton;
-    private EditText inputTitle;
+    private EditText inputTitle, inputLocation;
     private TimePicker timePicker;
     private DatePicker datePicker;
     private SimpleDateFormat timeFormatter, dateFormatter;
@@ -60,6 +60,7 @@ public class CreateGrindsActivity extends AppCompatActivity {
     private void initialise() {
 
         inputTitle = (EditText) findViewById(R.id.titlemessage);
+        inputLocation = (EditText) findViewById(R.id.locationmessage);
         timePicker = (TimePicker) findViewById(R.id.timepickermessage);
         datePicker = (DatePicker) findViewById(R.id.datepickermessage);
         radioType = (RadioGroup) findViewById(R.id.radioType);
@@ -93,6 +94,7 @@ public class CreateGrindsActivity extends AppCompatActivity {
 
         final String type = radioButton.getText().toString();
         final String title = inputTitle.getText().toString();
+        final String location = inputLocation.getText().toString();
         final int day = datePicker.getDayOfMonth();
         final String daytoString = Integer.toString(day);
         final int month = datePicker.getMonth();
@@ -129,13 +131,14 @@ public class CreateGrindsActivity extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     String department = dataSnapshot.getValue(String.class);
 
-                    final DatabaseReference Department = databaseReference.child("Department:");
-                    final DatabaseReference currentDepartment = Department.child(department);
+                    //final DatabaseReference Department = databaseReference.child("Department:");
+                    final DatabaseReference currentDepartment = databaseReference.child(department);
                     //final DatabaseReference currentUserDb = databaseReference.child(userId);
                     final DatabaseReference currentUserDb = currentDepartment.child(userId);
                     grindRef = currentUserDb.push();
 
                     grindRef.child("title").setValue(title);
+                    grindRef.child("location").setValue(location);
                     grindRef.child("time").setValue(hour + ":" + minute);
                     grindRef.child("date").setValue(day + "/" + (month + 1) + "/" + year);
                     grindRef.child("recurring").setValue(type);

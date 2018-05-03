@@ -9,6 +9,7 @@ public class FireModel {
     public String time;
     public String date;
     public String recurring;
+    public String location;
 
     public String getTitle() {
         return title;
@@ -40,5 +41,13 @@ public class FireModel {
 
     public void setRecurring(String recurring){
         this.recurring = recurring;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location){
+        this.location = location;
     }
 }

@@ -39,6 +39,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHode
         holder.date.setText(mylist.getDate());
         holder.time.setText(mylist.getTime());
         holder.recurring.setText(mylist.getRecurring());
+        holder.location.setText(mylist.getLocation());
     }
 
     @Override
@@ -67,13 +68,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHode
     }
 
     class MyHoder extends RecyclerView.ViewHolder{
-        TextView title,date,time,recurring;
+        TextView title,date,time,location,recurring;
 
         private MyHoder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.vtitle);
-            date = (TextView) itemView.findViewById(R.id.vdate);
             time = (TextView) itemView.findViewById(R.id.vtime);
+            date = (TextView) itemView.findViewById(R.id.vdate);
+            location = (TextView) itemView.findViewById(R.id.vlocation);
             recurring = (TextView) itemView.findViewById(R.id.vrecurring);
         }
     }

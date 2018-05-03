@@ -39,7 +39,7 @@
     <string name="grinds">Grinds</string>
     <string name="study_groups">Study Groups</string>
     <string name="search">Search</string>
-    <string name="btn_creategrinds">Create Grinds</string>
+    <string name="btn_creategrinds">Create Grind</string>
     <string name="grindtitle">Grind Title</string>
     <string name="recurring">Is this session recurring:</string>
     <string name="yes">Yes</string>
@@ -53,4 +53,11 @@
     <string name="btn_back">Back</string>
     <string name="btn_reset_password">Reset Password</string>
     <string name="title_activity_maps">Map</string>
+    <string name="cardtitle">Title</string>
+    <string name="carddate">Date</string>
+    <string name="cardtime">Time</string>
+    <string name="cardrecurring">Recurring</string>
+    <string name="cardlocation">Location</string>
+    <string name="grindlocation">Location:</string>
+    <string name="locationmessage">Input where the grind will take place (ie. room number)</string>
 </resources>
