@@ -1,15 +1,13 @@
 package com.example.kevdevries.studybetter;
-/**
- * Created by KevdeVries on 09/04/2018.
- */
 
-public class FireModel {
+public class StudyModel {
 
     public String title;
     public String time;
     public String date;
     public String recurring;
     public String location;
+    public String members;
 
     public String getTitle() {
         return title;
@@ -49,5 +47,13 @@ public class FireModel {
 
     public void setLocation(String location){
         this.location = location;
+    }
+
+    public String getMembers() {
+        return members;
+    }
+
+    public void setMembers(String members){
+        this.members = members;
     }
 }

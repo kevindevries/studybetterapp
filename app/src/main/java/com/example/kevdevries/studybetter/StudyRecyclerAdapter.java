@@ -10,15 +10,15 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * Created by KevdeVries on 09/04/2018.
+ * Created by KevdeVries on 12/04/2018.
  */
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHoder>{
+public class StudyRecyclerAdapter extends RecyclerView.Adapter<StudyRecyclerAdapter.MyHoder>{
 
-    private List<GrindModel> list;
+    private List<StudyModel> list;
     private Context context;
 
-    public RecyclerAdapter(List<GrindModel> list, Context context) {
+    public StudyRecyclerAdapter(List<StudyModel> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -26,7 +26,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHode
     @Override
     public MyHoder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.card,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.studycard,parent,false);
         MyHoder myHoder = new MyHoder(view);
 
         return myHoder;
@@ -34,12 +34,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHode
 
     @Override
     public void onBindViewHolder(MyHoder holder, int position) {
-        GrindModel mylist = list.get(position);
+        StudyModel mylist = list.get(position);
         holder.title.setText(mylist.getTitle());
         holder.date.setText(mylist.getDate());
         holder.time.setText(mylist.getTime());
         holder.recurring.setText(mylist.getRecurring());
         holder.location.setText(mylist.getLocation());
+        holder.members.setText(mylist.getMembers());
     }
 
     @Override
@@ -68,7 +69,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHode
     }
 
     class MyHoder extends RecyclerView.ViewHolder{
-        TextView title,date,time,location,recurring;
+        TextView title,date,time,location,members,recurring;
 
         private MyHoder(View itemView) {
             super(itemView);
@@ -76,6 +77,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHode
             time = (TextView) itemView.findViewById(R.id.vtime);
             date = (TextView) itemView.findViewById(R.id.vdate);
             location = (TextView) itemView.findViewById(R.id.vlocation);
+            members = (TextView) itemView.findViewById(R.id.vmembers);
             recurring = (TextView) itemView.findViewById(R.id.vrecurring);
         }
     }

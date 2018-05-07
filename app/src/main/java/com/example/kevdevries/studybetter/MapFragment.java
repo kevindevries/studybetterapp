@@ -11,6 +11,7 @@ import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 import android.support.constraint.Placeholder;
 
@@ -28,6 +29,10 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowCloseListener;
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowLongClickListener;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -44,11 +49,12 @@ import java.util.List;
 public class MapFragment extends SupportMapFragment implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
+        OnInfoWindowClickListener,
         LocationListener {
 
     private FirebaseAuth auth;
     private FirebaseDatabase database;
-    private DatabaseReference databaseReference, nameRef;
+    private DatabaseReference databaseReference, nameRef, yearRef, subject1Ref, subject2Ref, subject3Ref;
     GoogleMap mGoogleMap;
     SupportMapFragment mapFrag;
     LocationRequest mLocationRequest;
@@ -88,6 +94,8 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
 
         mGoogleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
+        mGoogleMap.setOnInfoWindowClickListener(this);
+
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference().child("Users").child("Locations");
 
@@ -110,6 +118,12 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
             buildGoogleApiClient();
             mGoogleMap.setMyLocationEnabled(true);
         }
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        String id = marker.getId();
+        Log.d("Info Window Clicked", id);
     }
 
     //create markers for all users
@@ -161,6 +175,11 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
             final String userId = auth.getCurrentUser().getUid();
 
             nameRef = database.getReference().child("Users").child(userId).child("firstName");
+            yearRef = database.getReference().child("Users").child(userId).child("year");
+            subject1Ref = database.getReference().child("Users").child(userId).child("subject1");
+            subject2Ref = database.getReference().child("Users").child(userId).child("subject2");
+            subject3Ref = database.getReference().child("Users").child(userId).child("subject3");
+
             final DatabaseReference currentUserDb = databaseReference.child(userId);
 
             nameRef.addValueEventListener(new ValueEventListener() {
@@ -168,6 +187,66 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     String name = dataSnapshot.getValue(String.class);
                     currentUserDb.child("firstName").setValue(name);
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    Log.w("Failed to read value.", error.toException());
+                }
+
+            });
+
+            yearRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    String name = dataSnapshot.getValue(String.class);
+                    currentUserDb.child("year").setValue(name);
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    Log.w("Failed to read value.", error.toException());
+                }
+
+            });
+
+            subject1Ref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    String name = dataSnapshot.getValue(String.class);
+                    currentUserDb.child("subject1").setValue(name);
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    Log.w("Failed to read value.", error.toException());
+                }
+
+            });
+
+            subject2Ref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    String name = dataSnapshot.getValue(String.class);
+                    currentUserDb.child("subject2").setValue(name);
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    Log.w("Failed to read value.", error.toException());
+                }
+
+            });
+
+            subject3Ref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    String name = dataSnapshot.getValue(String.class);
+                    currentUserDb.child("subject3").setValue(name);
 
                 }
 
@@ -224,13 +303,31 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                             coordinatesModel.setLatitude(s.getValue(CoordinatesModel.class).getLatitude());
                             coordinatesModel.setLongitude(s.getValue(CoordinatesModel.class).getLongitude());
                             coordinatesModel.setFirstName(s.getValue(CoordinatesModel.class).getFirstName());
+                            coordinatesModel.setYear(s.getValue(CoordinatesModel.class).getYear());
+                            coordinatesModel.setSubject1(s.getValue(CoordinatesModel.class).getSubject1());
+                            coordinatesModel.setSubject2(s.getValue(CoordinatesModel.class).getSubject2());
+                            coordinatesModel.setSubject3(s.getValue(CoordinatesModel.class).getSubject3());
 
                             double latt = coordinatesModel.getLatitude();
                             double lngg = coordinatesModel.getLongitude();
                             String firstName = coordinatesModel.getFirstName();
+                            String year = coordinatesModel.getYear();
+                            String subject1 = coordinatesModel.getSubject1();
+                            String subject2 = coordinatesModel.getSubject2();
+                            String subject3 = coordinatesModel.getSubject3();
                             //LatLng latLng1 = new LatLng(latt, lngg);
                             allMarkers[i] =
-                                    mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(latt, lngg)).title(firstName));
+                                    mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(latt, lngg))
+                                            .title(firstName + year + " year student.")
+                                            .snippet("Study Subjects. Click to Connect"));
+
+                            InfoWindowModel info = new InfoWindowModel();
+                            info.setSubject1(subject1);
+                            info.setSubject2(subject2);
+                            info.setSubject3(subject3);
+
+                            CustomInfoWindowAdapter customInfoWindow = new CustomInfoWindowAdapter(getActivity());
+                            mGoogleMap.setInfoWindowAdapter(customInfoWindow);
 
                         } catch (Exception ex) {
                         }
@@ -243,6 +340,9 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                 Log.w("Failed to read value.", error.toException());
             }
         });
+
+
+        //CustomInfoWindowAdapter customInfoWindow = new CustomInfoWindowAdapter(getActivity());
 
         //move map camera
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));

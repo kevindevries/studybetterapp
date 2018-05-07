@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/studycard_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:elevation="3dp"
+        card_view:cardCornerRadius="1dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/vtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cardtitle"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/vtime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cardtime"
+                android:layout_marginStart="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="12sp"
+                android:layout_below="@id/vtitle"/>
+
+            <TextView
+                android:id="@+id/vdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/carddate"
+                android:layout_marginStart="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_below="@id/vtime"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/vlocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cardlocation"
+                android:layout_marginStart="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_below="@id/vdate"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/vmembers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cardmembers"
+                android:layout_marginStart="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_below="@id/vlocation"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/vrecurring"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cardrecurring"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_below="@id/vmembers"
+                android:textSize="12sp"/>
+
+            <ImageView
+                android:id="@+id/overflow"
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/vtitle"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/menu" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

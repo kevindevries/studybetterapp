@@ -29,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 public class RegisterActivity extends AppCompatActivity {
     private RadioGroup radioType;
     private RadioButton radioButton;
-    private EditText inputFirst, inputLast, inputEmail, inputCollege, inputDepartment, inputCourse, inputPassword;
+    private EditText inputFirst, inputLast, inputEmail, inputCollege, inputDepartment, inputCourse, inputYear, inputSubject1, inputSubject2, inputSubject3, inputPassword;
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
     private Button btnregister, btncancel;
@@ -56,6 +56,10 @@ public class RegisterActivity extends AppCompatActivity {
         inputCollege = (EditText) findViewById(R.id.collegemessage);
         inputDepartment = (EditText) findViewById(R.id.departmentmessage);
         inputCourse = (EditText) findViewById(R.id.coursemessage);
+        inputYear = (EditText) findViewById(R.id.yearmessage);
+        inputSubject1 = (EditText) findViewById(R.id.subject1);
+        inputSubject2 = (EditText) findViewById(R.id.subject2);
+        inputSubject3 = (EditText) findViewById(R.id.subject3);
         inputPassword = (EditText) findViewById(R.id.passwordmessage);
         btnregister = (Button) findViewById(R.id.btn_register);
         btncancel = (Button) findViewById(R.id.btn_cancel);
@@ -92,6 +96,10 @@ public class RegisterActivity extends AppCompatActivity {
         final String college = inputCollege.getText().toString();
         final String department = inputDepartment.getText().toString();
         final String course = inputCourse.getText().toString();
+        final String year = inputYear.getText().toString();
+        final String subject1 = inputSubject1.getText().toString();
+        final String subject2 = inputSubject2.getText().toString();
+        final String subject3 = inputSubject3.getText().toString();
         final String password = inputPassword.getText().toString();
 
         if (TextUtils.isEmpty(firstName) && TextUtils.isEmpty(lastName) && TextUtils.isEmpty(email) && TextUtils.isEmpty(college) && TextUtils.isEmpty(department) && TextUtils.isEmpty(course) && TextUtils.isEmpty(password)) {
@@ -121,6 +129,10 @@ public class RegisterActivity extends AppCompatActivity {
                             currentUserDb.child("college").setValue(college);
                             currentUserDb.child("department").setValue(department);
                             currentUserDb.child("course").setValue(course);
+                            currentUserDb.child("year").setValue(year);
+                            currentUserDb.child("subject1").setValue(subject1);
+                            currentUserDb.child("subject2").setValue(subject2);
+                            currentUserDb.child("subject3").setValue(subject3);
 
                             updateUserInfoAndUI();
 

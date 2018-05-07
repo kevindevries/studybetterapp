@@ -60,4 +60,11 @@
     <string name="cardlocation">Location</string>
     <string name="grindlocation">Location:</string>
     <string name="locationmessage">Input where the grind will take place (ie. room number)</string>
+    <string name="cardmembers">Members</string>
+    <string name="year">Year:</string>
+    <string name="yearmessage">e.g Current academic year (text)</string>
+    <string name="groupsubjects">Study Group Subjects:</string>
+    <string name="subject1">Subject 1</string>
+    <string name="subject2">Subject 2</string>
+    <string name="subject3">Subject 3</string>
 </resources>

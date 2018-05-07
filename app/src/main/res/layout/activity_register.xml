@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,6 +7,10 @@
     android:layout_height="match_parent"
     android:padding="10dp"
     tools:context="com.example.kevdevries.studybetter.RegisterActivity">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/register"
@@ -183,6 +187,67 @@
             android:textColor="@android:color/darker_gray" />
 
         <TextView
+            android:id="@+id/yearofstudy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:text="@string/year"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="10sp"/>
+
+        <EditText
+            android:id="@+id/yearmessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:hint="@string/yearmessage"
+            android:textColor="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/groupsubjects"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:text="@string/groupsubjects"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="10sp"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/subject1"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:hint="@string/subject1"
+            android:textColor="@android:color/darker_gray" />
+
+        <EditText
+            android:id="@+id/subject2"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/subject1"
+            android:hint="@string/subject2"
+            android:textColor="@android:color/darker_gray" />
+
+        <EditText
+            android:id="@+id/subject3"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/subject2"
+            android:hint="@string/subject3"
+            android:textColor="@android:color/darker_gray" />
+    </LinearLayout>
+
+        <TextView
             android:id="@+id/password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -227,3 +292,4 @@
     </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>
+    </ScrollView>

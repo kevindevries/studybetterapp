@@ -27,7 +27,7 @@ public class GrindsActivity extends AppCompatActivity {
 
     private FirebaseDatabase database;
     private DatabaseReference userRef, childRef, userRootRef, grindRootRef, departRef, departRootRef, grindRef;
-    private List<FireModel> list;
+    private List<GrindModel> list;
     private RecyclerView recycle;
     private Button view;
     private FirebaseAuth auth;
@@ -73,12 +73,12 @@ public class GrindsActivity extends AppCompatActivity {
                                         //Loop 1 to go through all the child nodes of User ID
                                         for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                                             //loop 2 to go through all the child nodes of grind ID
-                                            list = new ArrayList<FireModel>();
+                                            list = new ArrayList<GrindModel>();
                                             for (DataSnapshot grindsSnapshot : userSnapshot.getChildren()) {
                                                 //for (DataSnapshot dataSnapshot1 : grindsSnapshot.getChildren()) {
 
-                                                FireModel value = grindsSnapshot.getValue(FireModel.class);
-                                                FireModel fire = new FireModel();
+                                                GrindModel value = grindsSnapshot.getValue(GrindModel.class);
+                                                GrindModel fire = new GrindModel();
                                                 //String title = dataSnapshot1.child("title").getValue().toString();
                                                 //String time = dataSnapshot1.child("time").getValue().toString();
                                                 //String date = dataSnapshot1.child("date").getValue().toString();

@@ -167,6 +167,7 @@
             android:gravity="center"
             android:text="@string/button_cancel" />
     </LinearLayout>
+
 </android.support.design.widget.CoordinatorLayout>
 </ScrollView>
 
