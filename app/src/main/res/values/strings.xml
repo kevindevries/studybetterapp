@@ -67,4 +67,7 @@
     <string name="subject1">Subject 1</string>
     <string name="subject2">Subject 2</string>
     <string name="subject3">Subject 3</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="join">Join</string>
 </resources>

@@ -318,16 +318,16 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                             //LatLng latLng1 = new LatLng(latt, lngg);
                             allMarkers[i] =
                                     mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(latt, lngg))
-                                            .title(firstName + year + " year student.")
-                                            .snippet("Study Subjects. Click to Connect"));
-
+                                            .title(firstName + " " + year + " year student.")
+                                            .snippet(subject1 + ", " + subject2 + ", " + subject3));
+/*
                             InfoWindowModel info = new InfoWindowModel();
                             info.setSubject1(subject1);
                             info.setSubject2(subject2);
                             info.setSubject3(subject3);
-
-                            CustomInfoWindowAdapter customInfoWindow = new CustomInfoWindowAdapter(getActivity());
-                            mGoogleMap.setInfoWindowAdapter(customInfoWindow);
+*/
+                            //CustomInfoWindowAdapter customInfoWindow = new CustomInfoWindowAdapter(getActivity());
+                            //mGoogleMap.setInfoWindowAdapter(customInfoWindow);
 
                         } catch (Exception ex) {
                         }

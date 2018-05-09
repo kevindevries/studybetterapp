@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        tools:context="com.example.kevdevries.studybetter.UpdateActivity">
+
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/register"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/update"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/areyou"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginLeft="16dp"
+                    android:text="@string/areyou"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="10sp"/>
+
+                <RadioGroup
+                    android:id="@+id/radioType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radioStudent"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="10"
+                        android:layout_height="wrap_content"
+                        android:text="@string/radio_student"
+                        android:checked="true" />
+
+                    <RadioButton
+                        android:id="@+id/radioTutor"
+                        android:layout_width="0dp"
+                        android:layout_weight="10"
+                        android:layout_height="wrap_content"
+                        android:text="@string/radio_tutor" />
+
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/firstname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:text="@string/firstname"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="10sp"/>
+
+                <EditText
+                    android:id="@+id/namemessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:inputType="textPersonName"
+                    android:hint="@string/firstname_message"
+                    android:textColor="@android:color/darker_gray"
+                    android:textColorHint="@android:color/darker_gray"/>
+
+                <TextView
+                    android:id="@+id/surname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:text="@string/surname"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="10sp"/>
+
+                <EditText
+                    android:id="@+id/surnamemessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:inputType="textPersonName"
+                    android:hint="@string/surname_message"
+                    android:textColor="@android:color/darker_gray" />
+
+                <TextView
+                    android:id="@+id/college"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:text="@string/college"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="10sp"/>
+
+                <EditText
+                    android:id="@+id/collegemessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:hint="@string/college_message"
+                    android:textColor="@android:color/darker_gray" />
+
+                <TextView
+                    android:id="@+id/department"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:text="@string/department"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="10sp"/>
+
+                <EditText
+                    android:id="@+id/departmentmessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:hint="@string/department_message"
+                    android:textColor="@android:color/darker_gray" />
+
+                <TextView
+                    android:id="@+id/course"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:text="@string/course"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="10sp"/>
+
+                <EditText
+                    android:id="@+id/coursemessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:hint="@string/course_message"
+                    android:textColor="@android:color/darker_gray" />
+
+                <TextView
+                    android:id="@+id/yearofstudy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:text="@string/year"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="10sp"/>
+
+                <EditText
+                    android:id="@+id/yearmessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:hint="@string/yearmessage"
+                    android:textColor="@android:color/darker_gray" />
+
+                <TextView
+                    android:id="@+id/groupsubjects"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:text="@string/groupsubjects"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="10sp"/>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/subject1"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        android:hint="@string/subject1"
+                        android:textColor="@android:color/darker_gray" />
+
+                    <EditText
+                        android:id="@+id/subject2"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/subject1"
+                        android:hint="@string/subject2"
+                        android:textColor="@android:color/darker_gray" />
+
+                    <EditText
+                        android:id="@+id/subject3"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/subject2"
+                        android:hint="@string/subject3"
+                        android:textColor="@android:color/darker_gray" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_update"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginRight="70dp"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center"
+                    android:text="@string/update" />
+
+                <Button
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginRight="70dp"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center"
+                    android:text="@string/button_cancel" />
+            </LinearLayout>
+
+        </android.support.design.widget.CoordinatorLayout>
+    </ScrollView>

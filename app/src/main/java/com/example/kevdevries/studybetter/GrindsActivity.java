@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-//Grinds for Student view/leave
+//Grinds for Student view/join
 public class GrindsActivity extends AppCompatActivity {
 
     private FirebaseDatabase database;

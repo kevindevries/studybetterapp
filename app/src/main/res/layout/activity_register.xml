@@ -271,23 +271,23 @@
         <Button
             android:id="@+id/btn_register"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="70dp"
             android:layout_marginRight="70dp"
+            android:background="@color/colorPrimary"
             android:gravity="center"
-            android:background="@android:color/holo_red_light"
             android:text="@string/button_register2" />
 
         <Button
             android:id="@+id/btn_cancel"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:layout_marginLeft="70dp"
             android:layout_marginRight="70dp"
+            android:background="@color/colorPrimary"
             android:gravity="center"
-            android:background="@android:color/holo_red_light"
             android:text="@string/button_cancel" />
     </LinearLayout>
 

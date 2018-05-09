@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -18,70 +17,148 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/vtitle"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/cardtitle"
-                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:textSize="15sp"/>
+                android:orientation="horizontal"
+                android:id="@+id/lineartitle">
 
-            <TextView
-                android:id="@+id/vtime"
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/cardtitle"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/vtitle"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/cardtitle"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/cardtime"
-                android:layout_marginStart="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:textSize="12sp"
-                android:layout_below="@id/vtitle"/>
+                android:orientation="horizontal"
+                android:id="@+id/lineartime"
+                android:layout_below="@id/lineartitle">
 
-            <TextView
-                android:id="@+id/vdate"
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/cardtime"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/vtime"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/cardtime"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/carddate"
-                android:layout_marginStart="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_below="@id/vtime"
-                android:textSize="12sp"/>
+                android:orientation="horizontal"
+                android:id="@+id/lineardate"
+                android:layout_below="@id/lineartime">
 
-            <TextView
-                android:id="@+id/vlocation"
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/carddate"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/vdate"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/carddate"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/cardlocation"
-                android:layout_marginStart="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_below="@id/vdate"
-                android:textSize="12sp"/>
+                android:orientation="horizontal"
+                android:id="@+id/linearlocation"
+                android:layout_below="@id/lineardate">
 
-            <TextView
-                android:id="@+id/vrecurring"
+                <TextView
+                    android:id="@+id/location"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/cardlocation"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/vlocation"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/cardlocation"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/cardrecurring"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_below="@id/vlocation"
-                android:textSize="12sp"/>
+                android:orientation="horizontal"
+                android:id="@+id/linearrecurring"
+                android:layout_below="@id/linearlocation">
+
+                <TextView
+                    android:id="@+id/recurring"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/cardrecurring"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/vrecurring"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/cardrecurring"
+                    android:textSize="12sp" />
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/overflow"
                 android:layout_width="20dp"
                 android:layout_height="30dp"
                 android:layout_alignParentRight="true"
-                android:layout_below="@id/vtitle"
                 android:layout_marginTop="10dp"
                 android:src="@drawable/menu" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
 </LinearLayout>
+
