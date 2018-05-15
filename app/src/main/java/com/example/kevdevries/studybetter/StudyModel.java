@@ -1,4 +1,9 @@
 package com.example.kevdevries.studybetter;
+/**
+ * Created by KevdeVries on 02/04/2018.
+ *
+ * Model for Study Group data
+ */
 
 public class StudyModel {
 

@@ -10,7 +10,9 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * Created by KevdeVries on 12/04/2018.
+ * Created by KevdeVries on 12/03/2018.
+ *
+ * Adapter to create Study Group cards (view/leave)
  */
 
 public class StudyRecyclerAdapter extends RecyclerView.Adapter<StudyRecyclerAdapter.MyHoder>{

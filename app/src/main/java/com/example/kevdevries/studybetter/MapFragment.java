@@ -6,45 +6,33 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.os.Bundle;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
-import android.support.constraint.Placeholder;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
-import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
-import com.google.android.gms.maps.GoogleMap.OnInfoWindowCloseListener;
-import com.google.android.gms.maps.GoogleMap.OnInfoWindowLongClickListener;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.DataSnapshot;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MapFragment extends SupportMapFragment implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -122,8 +110,17 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
 
     @Override
     public void onInfoWindowClick(Marker marker) {
+        Bundle bundle = new Bundle();
+
         String id = marker.getId();
-        Log.d("Info Window Clicked", id);
+        String details = marker.getTitle();
+        bundle.putString("title", details);
+
+        Intent intentExtras = new Intent(MapFragment.this.getActivity(), SendStudyActivity.class);
+        intentExtras.putExtras(bundle);
+        startActivity(intentExtras);
+
+        Log.d("Info Window Clicked", details);
     }
 
     //create markers for all users
@@ -355,7 +352,6 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
         if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
-            // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
                     android.Manifest.permission.ACCESS_FINE_LOCATION)) {
 
@@ -396,8 +392,6 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    // permission was granted, yay! Do the
-                    // location-related task you need to do.
                     if (ContextCompat.checkSelfPermission(getActivity(),
                             Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
@@ -410,8 +404,6 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
 
                 } else {
 
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
                     Toast.makeText(getActivity(), "permission denied", Toast.LENGTH_LONG).show();
                 }
             }

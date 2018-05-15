@@ -9,7 +9,9 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 
 /**
- * Created by KevdeVries on 06/04/2018.
+ * Created by KevdeVries on 10/03/2018.
+ *
+ * Model to create a custom Info Window
  */
 
 public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {

@@ -1,18 +1,15 @@
 package com.example.kevdevries.studybetter;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +23,7 @@ import java.util.List;
 public class GrindsActivity extends AppCompatActivity {
 
     private FirebaseDatabase database;
-    private DatabaseReference userRef, childRef, userRootRef, grindRootRef, departRef, departRootRef, grindRef;
+    private DatabaseReference userRootRef, grindRootRef, grindRef;
     private List<GrindModel> list;
     private RecyclerView recycle;
     private Button view;
@@ -123,46 +120,10 @@ public class GrindsActivity extends AppCompatActivity {
             }
         });
 
-        //Find current users department and tutors in same department
-        //Show student available grinds in their department
-        //Structure : Grinds > Department > tutorID > grindID > data
-/*
-        grindRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                list = new ArrayList<FireModel>();
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-
-                    FireModel value = dataSnapshot.getValue(FireModel.class);
-                    FireModel fire = new FireModel();
-                    //String title = dataSnapshot1.child("title").getValue().toString();
-                    //String time = dataSnapshot1.child("time").getValue().toString();
-                    //String date = dataSnapshot1.child("date").getValue().toString();
-                    //String recurring = dataSnapshot1.child("recurring").getValue().toString();
-                    String date = value.getDate();
-                    String recurring = value.getRecurring();
-                    String time = value.getTime();
-                    String title = value.getTitle();
-                    fire.setRecurring(recurring);
-                    fire.setDate(date);
-                    fire.setTime(time);
-                    fire.setTitle(title);
-                    list.add(fire);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                Log.w("Failed to read value.", error.toException());
-            }
-
-        });
-*/
-
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RecyclerAdapter recyclerAdapter = new RecyclerAdapter(list, GrindsActivity.this);
+               GrindsAdapter recyclerAdapter = new GrindsAdapter(list, GrindsActivity.this);
                 RecyclerView.LayoutManager recyce = new LinearLayoutManager(GrindsActivity.this);
                 recycle.setLayoutManager(recyce);
                 recycle.setItemAnimator(new DefaultItemAnimator());
@@ -171,5 +132,7 @@ public class GrindsActivity extends AppCompatActivity {
             }
 
         });
+
+
     }
 }

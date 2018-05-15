@@ -1,14 +1,14 @@
 package com.example.kevdevries.studybetter;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import 	android.os.Handler;
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.app.Activity;
 
+//Launcher Activity/Splashscreen
 public class LaunchActivity extends Activity {
     private static int TIME_OUT = 4000; //Time to launch the another activity
     @Override

@@ -1,6 +1,8 @@
 package com.example.kevdevries.studybetter;
 /**
  * Created by KevdeVries on 09/04/2018.
+ *
+ * Model for Grind data
  */
 
 public class GrindModel {

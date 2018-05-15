@@ -2,10 +2,9 @@ package com.example.kevdevries.studybetter;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.nfc.Tag;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -26,12 +25,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+//Register a user profile
 public class RegisterActivity extends AppCompatActivity {
     private RadioGroup radioType;
     private RadioButton radioButton;
     private EditText inputFirst, inputLast, inputEmail, inputCollege, inputDepartment, inputCourse, inputYear, inputSubject1, inputSubject2, inputSubject3, inputPassword;
     private FirebaseDatabase database;
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference, locationReference;
     private Button btnregister, btncancel;
     private DatabaseReference rootRef, userRef, childRef;
     private ProgressDialog progressBar;
@@ -47,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
         initialise();
     }
 
-    private void initialise(){
+    private void initialise() {
 
         radioType = (RadioGroup) findViewById(R.id.radioType);
         inputFirst = (EditText) findViewById(R.id.namemessage);
@@ -71,17 +71,17 @@ public class RegisterActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         btnregister.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            createAccount();
-        }
+            @Override
+            public void onClick(View v) {
+                createAccount();
+            }
         });
 
         btncancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
-        }
+                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+            }
         });
     }
 
@@ -107,7 +107,7 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-            auth.createUserWithEmailAndPassword(email, password)
+        auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -134,9 +134,19 @@ public class RegisterActivity extends AppCompatActivity {
                             currentUserDb.child("subject2").setValue(subject2);
                             currentUserDb.child("subject3").setValue(subject3);
 
+                            if (type.equalsIgnoreCase("Student")) {
+                                locationReference = database.getReference().child("Users").child("Locations").child(userId);
+                                locationReference.child("latitude").setValue(0);
+                                locationReference.child("longitude").setValue(0);
+                                locationReference.child("firstName").setValue(firstName);
+                                locationReference.child("subject1").setValue(subject1);
+                                locationReference.child("subject2").setValue(subject2);
+                                locationReference.child("subject3").setValue(subject3);
+                                locationReference.child("year").setValue(year);
+                            }
                             updateUserInfoAndUI();
 
-                        }else {
+                        } else {
 
                             //Debug if user creation unsuccessful
                             Log.w(TAG, "createUserWithEmail:failed");
@@ -151,7 +161,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    private void updateUserInfoAndUI(){
+    private void updateUserInfoAndUI() {
 
         final String userId = auth.getCurrentUser().getUid();
 
@@ -164,7 +174,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String type = dataSnapshot.getValue(String.class);
 
-                if (type.equalsIgnoreCase("Student")){
+                if (type.equalsIgnoreCase("Student")) {
                     Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();
@@ -191,7 +201,7 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task task) {
                         if (task.isSuccessful())
                             Toast.makeText(getApplicationContext(), "Verification email sent to: " + user.getEmail(), Toast.LENGTH_SHORT).show();
-                        else{
+                        else {
                             Log.e(TAG, "sendEmailVerification", task.getException());
                             Toast.makeText(getApplicationContext(), "Authentication Failed!", Toast.LENGTH_SHORT).show();
                         }

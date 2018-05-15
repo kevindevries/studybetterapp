@@ -1,5 +1,9 @@
 package com.example.kevdevries.studybetter;
-
+/**
+ * Created by KevdeVries on 09/02/2018.
+ *
+ * Model for Coordinates Data
+ */
 
 public class CoordinatesModel {
     private double latitude;

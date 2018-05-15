@@ -70,4 +70,9 @@
     <string name="update">Update</string>
     <string name="delete">Delete</string>
     <string name="join">Join</string>
+    <string name="send_study_request">Send Study Group Request</string>
+    <string name="existng">Choose from Existing</string>
+    <string name="new_study">Set up New Study Group</string>
+    <string name="btn_send">Send Request</string>
+    <string name="add">Add member to group</string>
 </resources>
